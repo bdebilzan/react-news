@@ -6,7 +6,7 @@ import logo from "../assets/bd-logo.png";
 const categories = [
   "general",
   "science",
-  "tech",
+  "technology",
   "sports",
   "business",
   "entertainment",

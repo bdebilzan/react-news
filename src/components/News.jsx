@@ -8,6 +8,7 @@ function News() {
   const { category } = useParams();
   const [news, setNews] = useState([]);
   const [error, setError] = useState(null);
+  const [validImages, setValidImages] = useState({});
 
   useEffect(() => {
     const loadNews = async () => {
@@ -16,17 +17,16 @@ function News() {
         setNews(news);
       } catch (error) {
         console.error(error.message);
-
-        if (error.message.includes("usage limit")) {
-          setError("You have reached the usage limit. Please try again later.");
-        } else {
-          setError("Failed to fetch news.");
-        }
+        setError("Failed to fetch news.");
       }
     };
 
     loadNews();
   }, [category]);
+
+  const handleImageError = (url) => {
+    setValidImages((prev) => ({ ...prev, [url]: false }));
+  };
 
   return (
     <div className="news-container">
@@ -37,9 +37,14 @@ function News() {
         </h1>
       </div>
       <div>
-        {(news &&
-          (news?.length > 0 ? (
-            news.map((article) => (
+        {news?.length > 0 ? (
+          news
+            .filter(
+              (article) =>
+                article.socialimage &&
+                validImages[article.socialimage] !== false
+            )
+            .map((article) => (
               <a
                 href={article.url}
                 key={article.url}
@@ -50,18 +55,19 @@ function News() {
                 <h4 className="article-title">{article.title}</h4>
                 <p className="article-description">{article.description}</p>
                 <p className="article-author">
-                  {article.source} | {timeAgoOrDate(article.published_at)}
+                  {article.domain} | {timeAgoOrDate(article.seendate)}
                 </p>
                 <img
-                  src={article.image_url}
+                  src={article.socialimage}
                   alt={article.title}
                   className="article-image"
+                  onError={() => handleImageError(article.socialimage)}
                 />
               </a>
             ))
-          ) : (
-            <p>No news available.</p>
-          ))) || <p>Loading news...</p>}
+        ) : (
+          <p>No news available.</p>
+        )}
       </div>
     </div>
   );

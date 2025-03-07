@@ -1,9 +1,9 @@
-const NEWS_KEY = import.meta.env.VITE_NEWS_API_KEY;
-
 export const getNews = async (category) => {
-  const url = `https://api.thenewsapi.com/v1/news/top?api_token=${NEWS_KEY}&categories=${encodeURIComponent(
-    category
-  )}&language=en&locale=us&limit=20&sort=published_at`;
+  const query = `${category} sourcecountry:US sourcelang:english`;
+  const url = `https://api.gdeltproject.org/api/v2/doc/doc?query=${encodeURIComponent(
+    query
+  )}&mode=artlist&timespan=1d&sort=datedesc&format=json`;
+
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -11,7 +11,7 @@ export const getNews = async (category) => {
     }
 
     const data = await response.json();
-    return data.data;
+    return data.articles;
   } catch (error) {
     console.error("API Error:", error.message);
     throw error;
