@@ -30,18 +30,22 @@ function News() {
         <h2>Top Headlines</h2>
       </div>
       <div>
-        {news.map((article) => (
-          <a href={article.url} key={article.url} className="article">
-            <h4 className="article-title">{article.title}</h4>
-            <p className="article-description">{article.description}</p>
-            <p className="article-author">{article.author}</p>
-            <img
-              src={article.urlToImage}
-              alt={article.title}
-              className="article-image"
-            />
-          </a>
-        ))}
+        {news?.length > 0 ? (
+          news.map((article) => (
+            <a href={article.url} key={article.url} className="article">
+              <h4 className="article-title">{article.title}</h4>
+              <p className="article-description">{article.description}</p>
+              <p className="article-author">{article.author}</p>
+              <img
+                src={article.urlToImage}
+                alt={article.title}
+                className="article-image"
+              />
+            </a>
+          ))
+        ) : (
+          <p>Loading news...</p>
+        )}
       </div>
     </div>
   );
