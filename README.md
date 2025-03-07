@@ -1,1 +1,1 @@
-Weather App with React
+News App with React and News API
