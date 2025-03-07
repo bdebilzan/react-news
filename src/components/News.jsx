@@ -3,6 +3,28 @@ import "../css/News.css";
 import { getNews } from "../services/api";
 import { useParams } from "react-router-dom";
 
+function timeAgoOrDate(timestamp) {
+  const now = new Date();
+  const past = new Date(timestamp);
+  const diffMs = now - past;
+  const diffMinutes = Math.floor(diffMs / (1000 * 60));
+  const diffHours = Math.floor(diffMinutes / 60);
+
+  if (diffMinutes < 1) {
+    return "Just now";
+  } else if (diffMinutes < 60) {
+    return `${diffMinutes}m ago`;
+  } else if (diffHours < 24) {
+    return `${diffHours}h ago`;
+  } else {
+    return past.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  }
+}
+
 function News() {
   const { category } = useParams();
   const [news, setNews] = useState([]);
@@ -26,18 +48,27 @@ function News() {
     <div className="news-container">
       {error && <div>{error}</div>}
       <div className="header">
-        <h1>{category.charAt(0).toUpperCase() + category.slice(1)} News</h1>
-        <h2>Top Headlines</h2>
+        <h1>
+          {category.charAt(0).toUpperCase() + category.slice(1)} Top Stories
+        </h1>
       </div>
       <div>
         {news?.length > 0 ? (
           news.map((article) => (
-            <a href={article.url} key={article.url} className="article">
+            <a
+              href={article.url}
+              key={article.url}
+              className="article"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <h4 className="article-title">{article.title}</h4>
               <p className="article-description">{article.description}</p>
-              <p className="article-author">{article.author}</p>
+              <p className="article-author">
+                {article.source} | {timeAgoOrDate(article.published_at)}
+              </p>
               <img
-                src={article.urlToImage}
+                src={article.image_url}
                 alt={article.title}
                 className="article-image"
               />

@@ -1,16 +1,10 @@
 const NEWS_KEY = import.meta.env.VITE_NEWS_API_KEY;
 
 export const getNews = async (category) => {
-  const url = `https://newsapi.org/v2/top-headlines?category=${encodeURIComponent(
+  const url = `https://api.thenewsapi.com/v1/news/top?api_token=${NEWS_KEY}&categories=${encodeURIComponent(
     category
-  )}&apiKey=${NEWS_KEY}`;
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      Connection: "keep-alive",
-      "Upgrade-Insecure-Requests": "1",
-    },
-  });
-  const data = await response.json();
-  return data.articles;
+  )}&language=en&locale=us&limit=20&sort=published_at`;
+  const response = await fetch(url);
+  const articles = await response.json();
+  return articles.data;
 };

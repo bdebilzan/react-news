@@ -5,11 +5,15 @@ import logo from "../assets/bd-logo.png";
 
 const categories = [
   "general",
-  "technology",
+  "science",
+  "tech",
   "sports",
   "business",
   "entertainment",
+  "politics",
+  "food",
   "health",
+  "travel",
 ];
 
 const Navbar = () => {
