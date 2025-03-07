@@ -1,6 +1,6 @@
 const NEWS_KEY = import.meta.env.VITE_NEWS_API_KEY;
 
-export const News = async (category) => {
+export const getNews = async (category) => {
   const url = `https://newsapi.org/v2/top-headlines?category=${encodeURIComponent(
     category
   )}&apiKey=${NEWS_KEY}`;
