@@ -5,13 +5,13 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import NavBar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import News from "./components/News";
 
 const App = () => {
   return (
     <Router>
-      <NavBar />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Navigate replace to="/general" />} />
         <Route path="/:category" element={<News />} />
