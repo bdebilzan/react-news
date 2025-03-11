@@ -4,12 +4,21 @@ import { getNews } from "../services/api";
 import { timeAgoOrDate } from "../utils/helpers";
 import { useParams } from "react-router-dom";
 import { categoryQueries } from "../utils/constants";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 
 function News() {
   const { category, searchQuery } = useParams();
   const [news, setNews] = useState([]);
   const [error, setError] = useState(null);
   const [validImages, setValidImages] = useState({});
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavorites(savedFavorites);
+  }, []);
 
   useEffect(() => {
     const loadNews = async () => {
@@ -29,6 +38,17 @@ function News() {
 
   const handleImageError = (url) => {
     setValidImages((prev) => ({ ...prev, [url]: false }));
+  };
+
+  const toggleFavorite = (article, event) => {
+    event.stopPropagation();
+
+    const updatedFavorites = favorites.some((fav) => fav.url === article.url)
+      ? favorites.filter((fav) => fav.url !== article.url)
+      : [...favorites, article];
+
+    setFavorites(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
 
   return (
@@ -51,31 +71,45 @@ function News() {
                 article.socialimage &&
                 validImages[article.socialimage] !== false
             )
-            .map((article) => (
-              <a
-                href={article.url}
-                key={article.url}
-                className="article"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="article-content">
-                  <h4 className="article-title">{article.title}</h4>
-                  <p className="article-description">{article.description}</p>
-                  <p className="article-author">
-                    {article.domain} | {timeAgoOrDate(article.seendate)}
-                  </p>
+            .map((article) => {
+              const isFavorited = favorites.some(
+                (fav) => fav.url === article.url
+              );
+
+              return (
+                <div
+                  key={article.url}
+                  className="article"
+                  onClick={() => window.open(article.url, "_blank")}
+                >
+                  <div className="article-content">
+                    <h4 className="article-title">{article.title}</h4>
+                    <p className="article-description">{article.description}</p>
+                    <p className="article-author">
+                      {article.domain} | {timeAgoOrDate(article.seendate)}
+                    </p>
+                    <button
+                      className={`favorite-button-selection ${
+                        isFavorited ? "favorited" : ""
+                      }`}
+                      onClick={(event) => toggleFavorite(article, event)}
+                    >
+                      <FontAwesomeIcon
+                        icon={isFavorited ? solidHeart : regularHeart}
+                      />
+                    </button>
+                  </div>
+                  {validImages[article.socialimage] !== false && (
+                    <img
+                      src={article.socialimage}
+                      alt={article.title}
+                      className="article-image"
+                      onError={() => handleImageError(article.socialimage)}
+                    />
+                  )}
                 </div>
-                {validImages[article.socialimage] !== false && (
-                  <img
-                    src={article.socialimage}
-                    alt={article.title}
-                    className="article-image"
-                    onError={() => handleImageError(article.socialimage)}
-                  />
-                )}
-              </a>
-            ))
+              );
+            })
         ) : (
           <p>No news available.</p>
         )}

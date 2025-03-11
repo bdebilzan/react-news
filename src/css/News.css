@@ -1,5 +1,6 @@
 .news-container {
   max-width: 900px;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -74,6 +75,22 @@
   object-fit: cover;
   border-radius: 5px;
   margin-left: 15px;
+}
+
+.favorite-button-selection {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 10px;
+  transition: transform 0.2s;
+}
+
+.favorite-button-selection:hover {
+  transform: scale(1.2);
+}
+
+.favorited {
+  color: red;
 }
 
 @media (max-width: 768px) {

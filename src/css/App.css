@@ -55,6 +55,37 @@ body.dark-mode {
   color: #f0f0f0;
 }
 
+.dark-mode .favorite-button-selection {
+  color: #f0f0f0;
+}
+
+.dark-mode .search-icon {
+  color: #f0f0f0;
+}
+
+.dark-mode .favorites-icon {
+  color: #f0f0f0;
+  background-color: #000000;
+}
+
+.dark-mode .search-form {
+  background: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
+.dark-mode .search-form input {
+  background: #000000;
+  color: white;
+  border: 1px solid #555;
+}
+
+.dark-mode .search-form button {
+  background: #060606;
+  color: white;
+  border: 1px solid #555;
+}
+
 .dark-mode .menu-toggle:hover {
   color: #747474;
 }

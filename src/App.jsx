@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import News from "./components/News";
+import Favorites from "./components/Favorites";
 import "./css/App.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/" element={<Navigate replace to="/general" />} />
           <Route path="/:category" element={<News />} />
           <Route path="/search/:searchQuery" element={<News />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </Router>
     </ThemeProvider>
