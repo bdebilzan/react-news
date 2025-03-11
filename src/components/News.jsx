@@ -3,18 +3,21 @@ import "../css/News.css";
 import { getNews } from "../services/api";
 import { timeAgoOrDate } from "../utils/helpers";
 import { useParams } from "react-router-dom";
+import { categoryQueries } from "../utils/constants";
 
 function News() {
-  const { category } = useParams();
+  const { category, searchQuery } = useParams();
   const [news, setNews] = useState([]);
   const [error, setError] = useState(null);
   const [validImages, setValidImages] = useState({});
 
   useEffect(() => {
     const loadNews = async () => {
+      setError(null);
       try {
-        const news = await getNews(category);
-        setNews(news);
+        const query = searchQuery ? searchQuery : categoryQueries[category];
+        const newsData = await getNews(query);
+        setNews(newsData);
       } catch (error) {
         console.error(error.message);
         setError("Failed to fetch news.");
@@ -22,7 +25,7 @@ function News() {
     };
 
     loadNews();
-  }, [category]);
+  }, [category, searchQuery]);
 
   const handleImageError = (url) => {
     setValidImages((prev) => ({ ...prev, [url]: false }));
@@ -30,14 +33,18 @@ function News() {
 
   return (
     <div className="news-container">
-      {error && <div>{error}</div>}
+      {error && <div className="error-message">{error}</div>}
       <div className="header">
         <h1>
-          {category.charAt(0).toUpperCase() + category.slice(1)} Top Stories
+          {searchQuery
+            ? `Search Results for "${searchQuery}"`
+            : `${
+                category.charAt(0).toUpperCase() + category.slice(1)
+              } Top Stories`}
         </h1>
       </div>
-      <div>
-        {news?.length > 0 ? (
+      <div className="news-list">
+        {news.length > 0 ? (
           news
             .filter(
               (article) =>
@@ -52,17 +59,21 @@ function News() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <h4 className="article-title">{article.title}</h4>
-                <p className="article-description">{article.description}</p>
-                <p className="article-author">
-                  {article.domain} | {timeAgoOrDate(article.seendate)}
-                </p>
-                <img
-                  src={article.socialimage}
-                  alt={article.title}
-                  className="article-image"
-                  onError={() => handleImageError(article.socialimage)}
-                />
+                <div className="article-content">
+                  <h4 className="article-title">{article.title}</h4>
+                  <p className="article-description">{article.description}</p>
+                  <p className="article-author">
+                    {article.domain} | {timeAgoOrDate(article.seendate)}
+                  </p>
+                </div>
+                {validImages[article.socialimage] !== false && (
+                  <img
+                    src={article.socialimage}
+                    alt={article.title}
+                    className="article-image"
+                    onError={() => handleImageError(article.socialimage)}
+                  />
+                )}
               </a>
             ))
         ) : (

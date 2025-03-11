@@ -7,16 +7,21 @@ import {
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import News from "./components/News";
+import "./css/App.css";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 const App = () => {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Navigate replace to="/general" />} />
-        <Route path="/:category" element={<News />} />
-      </Routes>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/general" />} />
+          <Route path="/:category" element={<News />} />
+          <Route path="/search/:searchQuery" element={<News />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 };
 

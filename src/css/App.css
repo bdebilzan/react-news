@@ -1,0 +1,70 @@
+body {
+  background-color: #ffffff;
+  color: #000000;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+  background-color: #000000;
+  color: #e0e0e0;
+}
+
+.dark-mode .navbar {
+  background-color: #000000;
+  border-bottom: 1px solid #333;
+}
+
+.dark-mode .nav-link {
+  color: #d0d0d0;
+}
+
+.dark-mode .nav-links.open {
+  background-color: #000000;
+  color: #e0e0e0;
+}
+
+.dark-mode .nav-link:hover {
+  color: #747474;
+}
+
+.article:hover {
+  background: #fbfbfb;
+}
+
+.dark-mode .article:hover {
+  background: #0f0f0f;
+}
+
+.dark-mode .article-title {
+  color: #f0f0f0;
+}
+
+.dark-mode .article-description {
+  color: #c0c0c0;
+}
+
+.dark-mode .article-author {
+  color: #a0a0a0;
+}
+
+.dark-mode .header {
+  color: #f0f0f0;
+}
+
+.dark-mode .menu-toggle {
+  color: #f0f0f0;
+}
+
+.dark-mode .menu-toggle:hover {
+  color: #747474;
+}
+
+.dark-mode .theme-toggle {
+  background: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
+.dark-mode .theme-toggle:hover {
+  background: #444;
+}
