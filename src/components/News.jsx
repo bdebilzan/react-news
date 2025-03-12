@@ -105,6 +105,7 @@ function News() {
                       alt={article.title}
                       className="article-image"
                       onError={() => handleImageError(article.socialimage)}
+                      loading="lazy"
                     />
                   )}
                 </div>

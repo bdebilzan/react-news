@@ -52,6 +52,7 @@ function Favorites() {
                   src={article.socialimage}
                   alt={article.title}
                   className="article-image"
+                  loading="lazy"
                 />
               )}
             </div>

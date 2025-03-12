@@ -70,6 +70,7 @@ const Navbar = () => {
                 src={!darkMode ? logo : darkModeLogo}
                 alt="Logo"
                 className="logo"
+                loading="lazy"
               />
             </NavLink>
 
