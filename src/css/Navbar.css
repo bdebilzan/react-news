@@ -28,6 +28,7 @@
   background: none;
   border: none;
   font-size: 16px;
+  color: black;
   cursor: pointer;
   margin-left: 0px;
   margin-right: 24px;
@@ -74,6 +75,7 @@
 }
 
 .search-icon {
+  color: #000;
   background: none;
   border: none;
   font-size: 16px;
@@ -186,6 +188,7 @@
 
   .search-form {
     top: 50px;
+    left: 0;
   }
 
   .menu-toggle:hover {

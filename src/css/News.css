@@ -78,6 +78,7 @@
 }
 
 .favorite-button-selection {
+  color: #000;
   background: none;
   border: none;
   cursor: pointer;
