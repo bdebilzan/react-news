@@ -91,7 +91,7 @@
 }
 
 .favorited {
-  color: red;
+  color: black;
 }
 
 @media (max-width: 768px) {
