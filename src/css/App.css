@@ -69,9 +69,7 @@ body.dark-mode {
 }
 
 .dark-mode .search-form {
-  background: #333;
   color: white;
-  border: 1px solid #555;
 }
 
 .dark-mode .search-form input {
@@ -81,7 +79,7 @@ body.dark-mode {
 }
 
 .dark-mode .search-form button {
-  background: #060606;
+  background: #131313;
   color: white;
   border: 1px solid #555;
 }
@@ -92,5 +90,13 @@ body.dark-mode {
 
 .dark-mode .theme-toggle {
   background: #000000;
+  color: white;
+}
+
+.dark-mode .search-bar {
+  background: #000000;
+}
+
+.dark-mode .back-button {
   color: white;
 }
