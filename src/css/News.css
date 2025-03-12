@@ -1,8 +1,9 @@
 .news-container {
+  padding-top: 80px;
+  padding-left: 20px;
   max-width: 900px;
   min-height: 100vh;
   margin: 0 auto;
-  padding: 20px;
   font-family: Arial, sans-serif;
   color: #333;
 }
@@ -97,7 +98,8 @@
 @media (max-width: 768px) {
   .news-container {
     max-width: 100%;
-    padding: 15px;
+    padding-top: 80px;
+    padding-left: 20px;
   }
 
   .article {
@@ -130,7 +132,8 @@
 
 @media (max-width: 480px) {
   .news-container {
-    padding: 10px;
+    padding-top: 80px;
+    padding-left: 10px;
   }
 
   .header h1 {
