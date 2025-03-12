@@ -204,6 +204,7 @@
 
   .menu-toggle {
     display: block;
+    color: black;
     font-size: 24px;
     padding: 0px;
     position: absolute;
@@ -215,10 +216,6 @@
   .search-form {
     top: 50px;
     left: 0;
-  }
-
-  .menu-toggle:hover {
-    color: #3498db;
   }
 
   .nav-links {

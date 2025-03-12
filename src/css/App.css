@@ -84,10 +84,6 @@ body.dark-mode {
   border: 1px solid #555;
 }
 
-.dark-mode .menu-toggle:hover {
-  color: #747474;
-}
-
 .dark-mode .theme-toggle {
   background: #000000;
   color: white;
