@@ -11,6 +11,7 @@ import {
   faMagnifyingGlass,
   faSun,
   faMoon,
+  faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
@@ -40,64 +41,78 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${searchOpen ? "search-mode" : ""}`}>
       <div className="nav-header">
-        <NavLink to="/general" className="logo-container">
-          <img
-            src={!darkMode ? logo : darkModeLogo}
-            alt="Logo"
-            className="logo"
-          />
-        </NavLink>
-
-        <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-          {Object.keys(categoryQueries).map((category) => (
-            <NavLink key={category} to={`/${category}`} className="nav-link">
-              {category.toUpperCase()}
-            </NavLink>
-          ))}
-        </div>
-        <div className="nav-actions">
-          <div className="search-container">
+        {searchOpen ? (
+          <div className="search-bar">
             <button
-              className="search-icon"
-              onClick={() => setSearchOpen(!searchOpen)}
+              className="back-button"
+              onClick={() => setSearchOpen(false)}
             >
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <FontAwesomeIcon icon={faArrowLeft} />
             </button>
-            {searchOpen && (
-              <form onSubmit={handleSearch} className="search-form">
-                <input
-                  type="text"
-                  placeholder="Search news..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <button className="search-button" type="submit">
-                  Go
-                </button>
-              </form>
-            )}
+            <form onSubmit={handleSearch} className="search-form">
+              <input
+                type="text"
+                placeholder="Search news..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button className="search-button" type="submit">
+                Go
+              </button>
+            </form>
           </div>
-          <button className="favorites-icon" onClick={handleFavoritesClick}>
-            <FontAwesomeIcon icon={faHeart} />
-            {favoritesCount > 0 && (
-              <span className="favorites-count">{favoritesCount}</span>
-            )}
-          </button>
-          <button
-            className="theme-toggle"
-            onClick={() => setDarkMode(!darkMode)}
-          >
-            <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
-          </button>
-          <button
-            className="menu-toggle"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            ☰
-          </button>
-        </div>
+        ) : (
+          <>
+            <NavLink to="/general" className="logo-container">
+              <img
+                src={!darkMode ? logo : darkModeLogo}
+                alt="Logo"
+                className="logo"
+              />
+            </NavLink>
+
+            <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+              {Object.keys(categoryQueries).map((category) => (
+                <NavLink
+                  key={category}
+                  to={`/${category}`}
+                  className="nav-link"
+                >
+                  {category.toUpperCase()}
+                </NavLink>
+              ))}
+            </div>
+
+            <div className="nav-actions">
+              <button
+                className="search-icon"
+                onClick={() => setSearchOpen(true)}
+              >
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+              </button>
+              <button className="favorites-icon" onClick={handleFavoritesClick}>
+                <FontAwesomeIcon icon={faHeart} />
+                {favoritesCount > 0 && (
+                  <span className="favorites-count">{favoritesCount}</span>
+                )}
+              </button>
+              <button
+                className="theme-toggle"
+                onClick={() => setDarkMode(!darkMode)}
+              >
+                <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
+              </button>
+              <button
+                className="menu-toggle"
+                onClick={() => setMenuOpen(!menuOpen)}
+              >
+                ☰
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </nav>
   );

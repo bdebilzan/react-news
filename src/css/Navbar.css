@@ -19,6 +19,29 @@
   background: #ddd;
 }
 
+.navbar.search-mode .nav-links,
+.navbar.search-mode .nav-actions,
+.navbar.search-mode .logo-container {
+  display: none;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 15px;
+  background: white;
+  justify-content: space-between;
+}
+
+.search-bar .back-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
 .dark-mode .navbar {
   background: #1a1a1a;
   border-bottom: 1px solid #333;
@@ -89,31 +112,34 @@
 }
 
 .search-form {
-  position: absolute;
-  top: 40px;
-  right: 0;
-  background: white;
-  padding: 5px;
-  border-radius: 5px;
+  flex-grow: 1;
   display: flex;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 150;
+  align-items: center;
 }
 
 .search-form input {
-  padding: 5px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   outline: none;
 }
 
-.search-form button {
-  background: #3498db;
+.search-form .search-button {
+  padding: 10px 15px;
+  font-size: 12px;
+  background: #4f4f4f;
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 4px;
   margin-left: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.search-form .search-button:hover {
+  background: rgb(93, 93, 93);
 }
 
 .navbar .nav-links {
