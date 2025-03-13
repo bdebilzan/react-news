@@ -4,7 +4,7 @@ export const getNews = async (category) => {
   const query = `${category} sourcecountry:US sourcelang:english`;
   const url = `https://api.gdeltproject.org/api/v2/doc/doc?query=${encodeURIComponent(
     query
-  )}&mode=artlist&timespan=1d&sort=relevance&format=json`;
+  )}&mode=artlist&timespan=3d&sort=relevance&format=json`;
 
   try {
     const response = await fetch(url);
