@@ -7,6 +7,8 @@ import { categoryQueries } from "../utils/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function News() {
   const { category, searchQuery } = useParams();
@@ -14,6 +16,7 @@ function News() {
   const [error, setError] = useState(null);
   const [validImages, setValidImages] = useState({});
   const [favorites, setFavorites] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -23,6 +26,7 @@ function News() {
   useEffect(() => {
     const loadNews = async () => {
       setError(null);
+      setLoading(true);
       try {
         const query = searchQuery ? searchQuery : categoryQueries[category];
         const newsData = await getNews(query);
@@ -30,6 +34,8 @@ function News() {
       } catch (error) {
         console.error(error.message);
         setError("Failed to fetch news.");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -64,7 +70,20 @@ function News() {
         </h1>
       </div>
       <div className="news-list">
-        {news.length > 0 ? (
+        {loading ? (
+          Array(7)
+            .fill(0)
+            .map((_, index) => (
+              <div key={index} className="article skeleton">
+                <div className="article-content">
+                  <Skeleton height={20} width="60%" />
+                  <Skeleton height={15} width="80%" />
+                  <Skeleton height={15} width="40%" />
+                </div>
+                <Skeleton height={80} width={120} />
+              </div>
+            ))
+        ) : news.length > 0 ? (
           news
             .filter(
               (article) =>
