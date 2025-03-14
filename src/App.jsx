@@ -8,6 +8,7 @@ import {
 import Navbar from "./components/Navbar";
 import News from "./components/News";
 import Favorites from "./components/Favorites";
+import Footer from "./components/Footer";
 import "./css/App.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/search/:searchQuery" element={<News />} />
           <Route path="/favorites" element={<Favorites />} />
         </Routes>
+        <Footer />
       </Router>
     </ThemeProvider>
   );

@@ -96,3 +96,12 @@ body.dark-mode {
 .dark-mode .back-button {
   color: white;
 }
+
+.dark-mode .footer {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.dark-mode .footer-links a {
+  color: #ffffff;
+}
