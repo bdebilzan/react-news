@@ -41,7 +41,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`navbar ${searchOpen ? "search-mode" : ""}`}>
+    <nav
+      className={`navbar ${searchOpen ? "search-mode" : ""} ${
+        menuOpen ? "menu-open" : ""
+      }`}
+    >
       <div className="nav-header">
         {searchOpen ? (
           <div className="search-bar">
@@ -73,19 +77,17 @@ const Navbar = () => {
                 loading="lazy"
               />
             </NavLink>
-            {menuOpen && (
-              <div className="nav-links open">
-                {Object.keys(categoryQueries).map((category) => (
-                  <NavLink
-                    key={category}
-                    to={`/${category}`}
-                    className="nav-link"
-                  >
-                    {category.toUpperCase()}
-                  </NavLink>
-                ))}
-              </div>
-            )}
+            <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+              {Object.keys(categoryQueries).map((category) => (
+                <NavLink
+                  key={category}
+                  to={`/${category}`}
+                  className="nav-link"
+                >
+                  {category.toUpperCase()}
+                </NavLink>
+              ))}
+            </div>
             <div className="nav-actions">
               {!menuOpen && (
                 <>
