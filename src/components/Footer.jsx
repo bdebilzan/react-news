@@ -14,7 +14,9 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-logo">
-          <img src={!darkMode ? logo : darkModeLogo} alt="BD News Logo" />
+          <a href="/general">
+            <img src={!darkMode ? logo : darkModeLogo} alt="BD News Logo" />
+          </a>
         </div>
         <p className="footer-text">
           BD News delivers essential stories, deep insights, and emerging trends
