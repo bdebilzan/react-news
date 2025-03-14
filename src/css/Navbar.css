@@ -66,6 +66,21 @@
   transition: background 0.3s ease;
 }
 
+.theme-toggle:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.search-icon:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.favorites-icon:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .logo-container {
   display: flex;
   align-items: center;
@@ -223,6 +238,13 @@
   .menu-toggle:focus {
     outline: none;
     box-shadow: none;
+  }
+
+  .menu-open .logo {
+    position: relative;
+    bottom: 203px;
+    left: 0px;
+    z-index: 1001;
   }
 
   .search-form {

@@ -94,6 +94,11 @@
   transition: transform 0.2s;
 }
 
+.favorite-button-selection:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .favorite-button-selection:hover {
   transform: scale(1.2);
 }
