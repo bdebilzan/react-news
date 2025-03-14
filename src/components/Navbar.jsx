@@ -73,38 +73,45 @@ const Navbar = () => {
                 loading="lazy"
               />
             </NavLink>
-
-            <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-              {Object.keys(categoryQueries).map((category) => (
-                <NavLink
-                  key={category}
-                  to={`/${category}`}
-                  className="nav-link"
-                >
-                  {category.toUpperCase()}
-                </NavLink>
-              ))}
-            </div>
-
+            {menuOpen && (
+              <div className="nav-links open">
+                {Object.keys(categoryQueries).map((category) => (
+                  <NavLink
+                    key={category}
+                    to={`/${category}`}
+                    className="nav-link"
+                  >
+                    {category.toUpperCase()}
+                  </NavLink>
+                ))}
+              </div>
+            )}
             <div className="nav-actions">
-              <button
-                className="search-icon"
-                onClick={() => setSearchOpen(true)}
-              >
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </button>
-              <button className="favorites-icon" onClick={handleFavoritesClick}>
-                <FontAwesomeIcon icon={faHeart} />
-                {favoritesCount > 0 && (
-                  <span className="favorites-count">{favoritesCount}</span>
-                )}
-              </button>
-              <button
-                className="theme-toggle"
-                onClick={() => setDarkMode(!darkMode)}
-              >
-                <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
-              </button>
+              {!menuOpen && (
+                <>
+                  <button
+                    className="search-icon"
+                    onClick={() => setSearchOpen(true)}
+                  >
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                  </button>
+                  <button
+                    className="favorites-icon"
+                    onClick={handleFavoritesClick}
+                  >
+                    <FontAwesomeIcon icon={faHeart} />
+                    {favoritesCount > 0 && (
+                      <span className="favorites-count">{favoritesCount}</span>
+                    )}
+                  </button>
+                  <button
+                    className="theme-toggle"
+                    onClick={() => setDarkMode(!darkMode)}
+                  >
+                    <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
+                  </button>
+                </>
+              )}
               <button
                 className="menu-toggle"
                 onClick={() => setMenuOpen(!menuOpen)}
